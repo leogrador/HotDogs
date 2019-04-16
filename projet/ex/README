@@ -1,0 +1,22 @@
+Classified-Ads-Script
+
+Last release:   1.0.2
+License:        GPL v3
+Installation:   http://classified-ads-script.co.uk
+Support at:     http://classified-ads-script.co.uk/forum/
+
+Requirements:
+
+Apache 2
+PHP 5.3+ (with PEAR and GD support)
+MySql 5+
+
+Installation:
+
+1. Download package. If you downloaded a zipped one then unzip it.
+2. Create a database for the script on your web server and a MySQL user who has all privileges for accessing.
+3. Run the sql commands are found in the db-install.sql file on your database.
+4. If you need sample data, run the sql commands in the db-sample.sql too.
+3. Go to the admin/include directory, open the config.php file and set it up according the comments.
+4. Upload all files to the desired location on your web server
+5. That's it.
