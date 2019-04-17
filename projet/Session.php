@@ -1,3 +1,4 @@
+<html>
 <?php
 
 class Session
@@ -23,7 +24,7 @@ class Session
         if ($secondKey == true) {
             if (isset($_SESSION[$key][$secondKey]))
                 return $_SESSION[$key][$secondKey];
-		} else {
+        } else {
             if (isset($_SESSION[$key]))
                 return $_SESSION[$key];
         }
@@ -46,4 +47,7 @@ class Session
     }
 
 }
+
 ?>
+
+</html>

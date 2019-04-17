@@ -7,10 +7,10 @@
 
     <title>HotDogs</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="css/coolblue.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/coolblue.css"/>
 
     <!--[if lt IE 9]>
-	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
@@ -23,25 +23,27 @@
 <body id="top">
 
 <!--header -->
-<div id="header-wrap"><header>
+<div id="header-wrap">
+    <header>
 
- 	<hgroup>
-        <h1>Trouvez un partenaire pour votre chien</h1>
-    </hgroup>
+        <hgroup>
+            <h1>Trouvez un partenaire pour votre chien</h1>
+        </hgroup>
 
-    <nav>
-		<ul>
-			<li id="current"><a href="index.html">Accueil</a><span></span></li>
-			<li><a href="Connexion.html">Connexion</a><span></span></li>
-			<li><a href="Annonces.php">Annonces</a><span></span></li>
-			<li><a href="contact.html">Nous contacter</a><span></span></li>
-		</ul>
-	</nav>
+        <nav>
+            <ul>
+                <li id="current"><a href="index.html">Accueil</a><span></span></li>
+                <li><a href="Connexion.html">Connexion</a><span></span></li>
+                <li><a href="Annonces.php">Annonces</a><span></span></li>
+                <li><a href="contact.html">Nous contacter</a><span></span></li>
+            </ul>
+        </nav>
 
 
-<!--/header-->
-</header></div>
-	
+        <!--/header-->
+    </header>
+</div>
+
 <!-- content-wrap -->
 <div id="content-wrap">
 
@@ -49,18 +51,12 @@
     <div id="content" class="clearfix">
 
 
-   	    <!-- main -->
-       
-	        <div id="main">
+        <!-- main -->
 
-		  
-			
-			
-			
-			
-			
-			
-<?php		
+        <div id="main">
+
+
+            <?php
 			
 				
 $connexion=mysqli_connect("localhost","root","");
@@ -81,135 +77,109 @@ $_SESSION['ville'] = $ville;
 
 mysqli_close($connexion); }}
 ?>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		         </div>
-				 
-				 
+
+
+        </div>
 
 
         <!-- /main -->
-        </div>
+    </div>
 
-  
 
     <!-- content -->
-	</div>
+</div>
 
 <!-- /content-out -->
 </div>
 
 
-		
 <!-- extra -->
-<div id="extra-wrap"><div id="extra" class="clearfix">
+<div id="extra-wrap">
+    <div id="extra" class="clearfix">
 
 
-	    <div class="col first">
+        <div class="col first">
 
-		    <h3>Informations</h3>
+            <h3>Informations</h3>
 
-		    <p>
-		    <strong>Phone: </strong>0600000000<br/>
-		    </p>
+            <p>
+                <strong>Phone: </strong>0600000000<br/>
+            </p>
 
-		    <p><strong>Address: </strong>123 chemin du bois </p>
+            <p><strong>Address: </strong>123 chemin du bois </p>
             <p><strong>E-mail: </strong>hotdogslove@gmailcom</p>
-		    <p>Plus d'informations ? <a href="contact.php">page contact</a></p>
+            <p>Plus d'informations ? <a href="contact.php">page contact</a></p>
 
             <h3>Nous suivre</h3>
 
             <ul class="subscribe-stuff">
-      	        <li><a title="Facebook" href="index.html" rel="nofollow">
-				<img alt="Facebook" title="Facebook" src="images/social_facebook.png" /></a>
-			    </li>
-			    <li><a title="Twitter" href="index.html" rel="nofollow">
-				<img alt="Twitter" title="Twitter" src="images/social_twitter.png" /></a>
-			    </li>
+                <li><a title="Facebook" href="index.html" rel="nofollow">
+                        <img alt="Facebook" title="Facebook" src="images/social_facebook.png"/></a>
+                </li>
+                <li><a title="Twitter" href="index.html" rel="nofollow">
+                        <img alt="Twitter" title="Twitter" src="images/social_twitter.png"/></a>
+                </li>
             </ul>
-	    </div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-	    <div class="col">
+        </div>
 
 
         <div class="col">
 
-            <h3>Credits</h3>
 
-            <div class="footer-list">
-			    <ul>
-				    <li><a href="http://jasonlarose.com/blog/110-free-classy-social-media-icons">
-						Icones gratuites
-				    </a>
-				    </li>
-                    <li><a href="http://styleshout.com">
-						Free css templates
-				    </a>
+            <div class="col">
 
-			    </ul>
-		    </div>
+                <h3>Credits</h3>
 
-        </div>
+                <div class="footer-list">
+                    <ul>
+                        <li><a href="http://jasonlarose.com/blog/110-free-classy-social-media-icons">
+                                Icones gratuites
+                            </a>
+                        </li>
+                        <li><a href="http://styleshout.com">
+                                Free css templates
+                            </a>
 
-		
-          	    <div class="col">
-
-         	    <h3>Qui sommes-nous ?</h3>
-
-                <p>
-		        <a href="nous.php"><img src="images/gravatar.jpg" width="42" height="42" alt="firefox" class="align-left" /></a>
-                Léonardo Da Silva étudiant en L3 MIASHS  et Cassy Deplace étudiante en L3 MIASHS - Sciences Cognitives. <a href="nous.php">En savoir plus...</a>
-			    </p>
+                    </ul>
+                </div>
 
             </div>
 
 
-<!-- /extra -->
-</div></div>
+            <div class="col">
+
+                <h3>Qui sommes-nous ?</h3>
+
+                <p>
+                    <a href="nous.php"><img src="images/gravatar.jpg" width="42" height="42" alt="firefox"
+                                            class="align-left"/></a>
+                    Léonardo Da Silva étudiant en L3 MIASHS et Cassy Deplace étudiante en L3 MIASHS - Sciences
+                    Cognitives. <a href="nous.php">En savoir plus...</a>
+                </p>
+
+            </div>
 
 
+            <!-- /extra -->
+        </div>
+    </div>
 
 
-<!-- footer -->
-<footer>
+    <!-- footer -->
+    <footer>
 
-	<p class="footer-left">
-		&copy; 2011 Copyright Info &nbsp; &nbsp; &nbsp;
-		Design by <a href="http://www.styleshout.com/">styleshout</a>
-	</p>
+        <p class="footer-left">
+            &copy; 2011 Copyright Info &nbsp; &nbsp; &nbsp;
+            Design by <a href="http://www.styleshout.com/">styleshout</a>
+        </p>
 
-	<p class="footer-right">
-	   	<a href="index.html">Home</a> 
-        <a href="#top" class="back-to-top">Back to Top</a>
-    </p>
+        <p class="footer-right">
+            <a href="index.html">Home</a>
+            <a href="#top" class="back-to-top">Back to Top</a>
+        </p>
 
-<!-- /footer -->
-</footer>
+        <!-- /footer -->
+    </footer>
 
 </body>
 </html>

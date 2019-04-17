@@ -7,10 +7,10 @@
 
     <title>HotDogs</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="css/coolblue.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/coolblue.css"/>
 
     <!--[if lt IE 9]>
-	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
@@ -23,304 +23,222 @@
 <body id="top">
 
 <!--header -->
-<div id="header-wrap"><header>
+<div id="header-wrap">
+    <header>
 
- 	<hgroup>
-        <h1>Trouvez un partenaire pour votre chien</h1>
-    </hgroup>
+        <hgroup>
+            <h1>Trouvez un partenaire pour votre chien</h1>
+        </hgroup>
 
-    <nav>
-		<ul>
-			<li><a href="index.php">Accueil</a><span></span></li>
-			<li><a href="Connexion.php">Connexion</a><span></span></li>
-			<li  id="current"><a href="Annonces.php">Annonces</a><span></span></li>
-			<li><a href="contact.php">Nous contacter</a><span></span></li>
-		</ul>
-	</nav>
+        <nav>
+            <ul>
+                <li><a href="index.php">Accueil</a><span></span></li>
+                <li><a href="Connexion.php">Connexion</a><span></span></li>
+                <li id="current"><a href="Annonces.php">Annonces</a><span></span></li>
+                <li><a href="contact.php">Nous contacter</a><span></span></li>
+            </ul>
+        </nav>
 
 
-<!--/header-->
-</header></div>
-	
+        <!--/header-->
+    </header>
+</div>
+
 <!-- content-wrap -->
 <div id="content-wrap">
 
     <!-- content -->
     <div id="content" class="clearfix">
 
-   	    <!-- main -->
+        <!-- main -->
         <div id="main">
 
-      	   
-		   
-		   	 
-				 <!-- Formulaire d'envoie d'une annonce -->
 
-         <div class="post-bottom-section">
+            <!-- Formulaire d'envoie d'une annonce -->
 
-		    <h4>Veuillez remplir ce formulaire</h4>
+            <div class="post-bottom-section">
 
-            <div class="primary">
+                <h4>Veuillez remplir ce formulaire</h4>
+
+                <div class="primary">
 
 
+                    <form action="{cible}" method="get" ENCTYPE="multipart/form-data">
+                        <fieldset>
+                            <input type="hidden" name="suivant" value="{suivant}"/>
+                            <input type="hidden" name="nom" value="{nom}"/>
+
+                            <p>
+                                <label for="nom">Nom</label>
+                                <input type="text" id="nom" name="nom" size="3"
+                                       maxlength="20" value="{nom}"/>
+                            </p>
+                            <p>
+                                <label for="mail_post">Email</label>
+                                <input type="text" id="mail_post" name="mail_post" size="20"
+                                       maxlength="20" value="{mail_post}"/>
+                            </p>
+
+                            <p>
+                                <label for="sexe">Sexe</label>
+                                <input type="text" id="sexe" name="sexe" size="20"
+                                       maxlength="20" value="{sexe}"/>
+                            </p>
+                            <p>
+                                <label for="age">Age</label>
+                                <input type="text" id="age" name="age" size="3" maxlength="3"
+                                       value="{age}"/>
+                            </p>
+                            <p>
+                                <label for="prix">Prix</label>
+                                <input type="text" id="prix" name="prix" size="20"
+                                       maxlength="20" value="{prix}"/>
+                            </p>
+                            <p>
+                                <label for="ville">Ville</label>
+                                <input type="text" id="ville" name="ville" size="20"
+                                       maxlength="20" value="{ville}"/>
+                            </p>
+                            <label for="nom_race"> Choisi une Race</label>
+                            <select name="nom_race" id="nom_race">
+                                <option value="">--Please choose an option--</option>
+                                <option value="berger allemand">Berger Allemand</option>
+                                <option value="boxer">Boxer</option>
+                                <option value="dalmatien">Dalmatien</option>
+                                <option value="dobermann">Dobermann</option>
+                                <option value="indeterminee">Indeterminée</option>
+                                <option value="fox terrier">Fox Terrier</option>
+                                <option value="saint-bernard">Saint-Bernard</option>
+                                <option value="shiba">Shiba</option>
+                                <option value="spitz">Spitz</option>
+                                <option value="yorkshire">Yorkshire</option>
+                            </select>
+
+                            </p>
+                            <p>
+                                <label for="login">Login</label>
+                                <input type="text" id="login" name="login" size="3"
+                                       maxlength="20" value="{login}"/>
+                            </p>
+                            <p>
+                                <label for="photo">Photo</label>
+                                <input type='hidden' name='MAX_FILE_SIZE' value='1000000'>
+                                <input type="file" id="photo" name="photo" value="{photo}"/>
+
+                            </p>
+                            <p>
+                                <input type="reset" value="Annuler"/>
+                                <input type="submit" value="Valider"/>
+                            </p>
+                        </fieldset>
+                    </form>
 
 
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-<form action="{cible}" method="get" ENCTYPE = "multipart/form-data">    
- <fieldset>        
- <input type="hidden" name="suivant" value="{suivant}" />         
- <input type="hidden" name="nom" value="{nom}" />  
-
- <p>             
- <label for="nom">Nom</label>            
- <input type="text" id="nom" name="nom" size="3"                   
- maxlength="20" value="{nom}" />         
- </p>         
- <p>            
- <label for="mail_post">Email</label>            
- <input type="text" id="mail_post" name="mail_post" size="20"                    
- maxlength="20" value="{mail_post}" />         
- </p> 
-   
- <p>            
- <label for="sexe">Sexe</label>            
- <input type="text" id="sexe" name="sexe" size="20"                    
- maxlength="20" value="{sexe}" />         
- </p>     
-  <p>            
-  <label for="age">Age</label>             
-  <input type="text" id="age" name="age" size="3" maxlength="3"                     
-  value="{age}" />         
-  </p>  
-  <p>            
- <label for="prix">Prix</label>            
- <input type="text" id="prix" name="prix" size="20"                    
- maxlength="20" value="{prix}" />         
- </p> 
-  <p>            
- <label for="ville">Ville</label>            
- <input type="text" id="ville" name="ville" size="20"                    
- maxlength="20" value="{ville}" />         
- </p> 
-  <label for="nom_race"> Choisi une Race</label>            
- <select name ="nom_race" id ="nom_race">     
-<option value="">--Please choose an option--</option>
-<option value="berger allemand">Berger Allemand</option>
-<option value="boxer">Boxer</option>
-<option value="dalmatien">Dalmatien</option>
-<option value="dobermann">Dobermann</option>
- <option value="indeterminee">Indeterminée</option>
- <option value="fox terrier">Fox Terrier</option>
-  <option value="saint-bernard">Saint-Bernard</option>
- <option value="shiba">Shiba</option>
- <option value="spitz">Spitz</option>
-<option value="yorkshire">Yorkshire</option>
-</select>
- 
- </p> 
-  <p>             
- <label for="login">Login</label>            
- <input type="text" id="login" name="login" size="3"                   
- maxlength="20" value="{login}" />         
- </p> 
-  <p>   
- <label for="photo">Photo</label>      
-<input type='hidden' name = 'MAX_FILE_SIZE' value = '1000000' > 
- <input type="file" id="photo" name="photo" value="{photo}" />    
- 
- </p> 
-  <p>            
-  <input type="reset" value="Annuler" />             
-  <input type="submit" value="Valider" />        
-  </p>     
-  </fieldset> 
-  </form> 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
             </div>
 
-         </div>	
-			
-			
-			
-			
-			
-<!-- FINI -->
-			
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-		   
-			
-			
-		         </div>
-				 
-				 
+
+            <!-- FINI -->
 
 
-        <!-- /main -->
         </div>
 
 
+        <!-- /main -->
+    </div>
+
 
     <!-- content -->
-	</div>
+</div>
 
 <!-- /content-out -->
 </div>
 
 
-		
 <!-- extra -->
-<div id="extra-wrap"><div id="extra" class="clearfix">
+<div id="extra-wrap">
+    <div id="extra" class="clearfix">
 
 
-	    <div class="col first">
+        <div class="col first">
 
-		    <h3>Informations</h3>
+            <h3>Informations</h3>
 
-		    <p>
-		    <strong>Phone: </strong>0600000000<br/>
-		    </p>
+            <p>
+                <strong>Phone: </strong>0600000000<br/>
+            </p>
 
-		    <p><strong>Address: </strong>123 chemin du bois </p>
+            <p><strong>Address: </strong>123 chemin du bois </p>
             <p><strong>E-mail: </strong>hotdogslove@gmailcom</p>
-		    <p>Plus d'informations ? <a href="contact.php">page contact</a></p>
+            <p>Plus d'informations ? <a href="contact.php">page contact</a></p>
 
             <h3>Nous suivre</h3>
-       
-          <ul class="subscribe-stuff">
-			    <li><a title="Twitter" href="https://twitter.com/hotdog53852273" rel="nofollow">
-				<img alt="Twitter" title="Twitter" src="images/social_twitter.png" /></a>
-			
-            </ul>
-	    </div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
 
-	    <div class="col">
+            <ul class="subscribe-stuff">
+                <li><a title="Twitter" href="https://twitter.com/hotdog53852273" rel="nofollow">
+                    <img alt="Twitter" title="Twitter" src="images/social_twitter.png"/></a>
+
+            </ul>
+        </div>
 
 
         <div class="col">
 
-            <h3>Credits</h3>
 
-            <div class="footer-list">
-			    <ul>
-				    <li><a href="https://www.icone-png.com/animaux/chien/">
-						Icones gratuites
-				    </a>
-				    </li>
-                    <li><a href="http://styleshout.com">
-						Free css templates
-				    </a>
+            <div class="col">
 
-			    </ul>
-		    </div>
+                <h3>Credits</h3>
 
-        </div>
+                <div class="footer-list">
+                    <ul>
+                        <li><a href="https://www.icone-png.com/animaux/chien/">
+                            Icones gratuites
+                        </a>
+                        </li>
+                        <li><a href="http://styleshout.com">
+                            Free css templates
+                        </a>
 
-		        	    <div class="col">
-
-         	    <h3>Qui sommes-nous ?</h3>
-
-                <p>
-		        <a href="nous.php"><img src="images/gravatar.jpg" width="42" height="42" alt="firefox" class="align-left" /></a>
-                Léonardo Da Silva étudiant en L3 MIASHS  et Cassy Deplace étudiante en L3 MIASHS - Sciences Cognitives. <a href="nous.php">En savoir plus...</a>
-			    </p>
+                    </ul>
+                </div>
 
             </div>
 
-  
+            <div class="col">
 
-<!-- /extra -->
-</div></div>
+                <h3>Qui sommes-nous ?</h3>
+
+                <p>
+                    <a href="nous.php"><img src="images/gravatar.jpg" width="42" height="42" alt="firefox"
+                                            class="align-left"/></a>
+                    Léonardo Da Silva étudiant en L3 MIASHS et Cassy Deplace étudiante en L3 MIASHS - Sciences
+                    Cognitives. <a href="nous.php">En savoir plus...</a>
+                </p>
+
+            </div>
 
 
+            <!-- /extra -->
+        </div>
+    </div>
 
 
-<!-- footer -->
-<footer>
+    <!-- footer -->
+    <footer>
 
-	<p class="footer-left">
-		&copy; 2011 Copyright Info &nbsp; &nbsp; &nbsp;
-		Design by <a href="http://www.styleshout.com/">styleshout</a>
-	</p>
+        <p class="footer-left">
+            &copy; 2011 Copyright Info &nbsp; &nbsp; &nbsp;
+            Design by <a href="http://www.styleshout.com/">styleshout</a>
+        </p>
 
-	<p class="footer-right">
-	   	<a href="index.html">Home</a> 
-        <a href="#top" class="back-to-top">Back to Top</a>
-    </p>
+        <p class="footer-right">
+            <a href="index.html">Home</a>
+            <a href="#top" class="back-to-top">Back to Top</a>
+        </p>
 
-<!-- /footer -->
-</footer>
+        <!-- /footer -->
+    </footer>
 
 </body>
 </html>

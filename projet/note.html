@@ -1,37 +1,33 @@
 <html>
 
 
-<form action="{cible2}" method="get" ENCTYPE = "multipart/form-data">
-<input type="hidden" name="noter" value="{noter}" /> 
-<input type="hidden" name="nom" value="{nom}" />  
+<form action="{cible2}" method="get" ENCTYPE="multipart/form-data">
+    <input type="hidden" name="noter" value="{noter}"/>
+    <input type="hidden" name="nom" value="{nom}"/>
 
 
+    <div>
+        <label for="note">Attention ! Un utilisateur ne peut voter qu\'une fois<span></span></label>
+        <label>
+            <input type="radio" name="note" value="1"/>
+            <img src="images/pouce2.png">
+        </label>
+        <label>
+            <input type="radio" name="note" value="2"/>
+            <img src="images/pouce2.png"> <img src="images/pouce2.png">
+        </label>
+        <label>
+            <input type="radio" name="note" value="3"/>
+            <img src="images/pouce2.png"> <img src="images/pouce2.png"> <img src="images/pouce2.png">
+        </label>
 
-               	    <div>
-					    <label for="note">Attention ! Un utilisateur ne peut voter qu\'une fois<span></span></label>
-<label>
-  <input type = "radio" name = "note" value ="1" />
-  <img src="images/pouce2.png">
-</label>
-<label>
-  <input type = "radio" name = "note" value ="2" />
-  <img src="images/pouce2.png">         <img src="images/pouce2.png">
-</label>
-<label>
-  <input type = "radio" name = "note" value ="3" />
-  <img src="images/pouce2.png">         <img src="images/pouce2.png">        <img src="images/pouce2.png">
-</label>
-						
-					</div>
-					 <div class="no-border">
-					    <input class="button" type="submit" value="Poster" tabindex="5" />
-					</div>
-				
-				
+    </div>
+    <div class="no-border">
+        <input class="button" type="submit" value="Poster" tabindex="5"/>
+    </div>
 
 
-               </form>
-			   
-			   
-			   
+</form>
+
+
 </html>
