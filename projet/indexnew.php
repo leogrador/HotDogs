@@ -1,5 +1,14 @@
 <?php
-session_start();
+require 'Session.php';
+Session::start();
+Session::set('name', array(
+	'name' => 'jesse',
+	'number' => 911
+	));
+
+echo Session::get('name');
+
+Session::display();
 ?>
 <html>
 <head>
@@ -86,15 +95,13 @@ session_start();
 
                     <p><a class="more" href="inscription.php">Inscription &raquo;</a></p>
 					<?php
-		if(isset($_SESSION["login"]) AND
-        $_SESSION["login"] != "")
-        {
-         $var = $_SESSION["login"];
-		 Echo '<p><a class="more" href="deconnexion.php">Deconnexion &raquo; </a></p>';
-        } 
-		
-		
-		?>		
+						if(isset($_SESSION["login"]) AND
+						$_SESSION["login"] != "")
+						{
+						$var = $_SESSION["login"];
+						Echo '<p><a class="more" href="deconnexion.php">Deconnexion &raquo; </a></p>';
+						} 
+					?>		
 
                 </div>
 
