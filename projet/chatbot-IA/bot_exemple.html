@@ -1,0 +1,465 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link id="pagestyle" rel="stylesheet" type="text/css" href="chatbot.css" />
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"   =" crossorigin="anonymous"></script>
+    <style>
+        #demo {
+            /*background-color: #6B6B32;*/
+            width: 80%;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+            background-color: #373838;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px #999;
+            line-height: 1.4em;
+            font: 13px helvetica,arial,freesans,clean,sans-serif;
+            color: black;
+        }
+        #demo input {
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            width: 400px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #0A73B1;
+            color: #fff;
+            padding: 8px;
+            cursor: pointer;
+            float: right;
+        }
+        #chatBotCommandDescription {
+            display: none;
+            margin-bottom: 20px;
+        }
+        input:focus {
+            outline: none;
+        }
+        .chatBotChatEntry {
+            display: none;
+        }
+    </style>
+    </head>
+
+<body id="top">
+
+
+<div id="header-wrap"><header>
+ 	<hgroup>
+        <h1>Aide à la recherche du partenaire idéal </h1>
+    </hgroup>
+    <nav>
+		<ul>
+			<li id="current"><a href="projet/index.php">Accueil</a><span></span></li>
+			<li><a href="Connexion.php">Connexion</a><span></span></li>
+			<li><a href="Annonces.php">Annonces</a><span></span></li>
+			<li><a href="chatbot-IA/bot_exemple.html">Chatbot</a><span></span></li>
+		</ul>
+	</nav>
+</header></div>
+
+<br>
+<br>
+
+
+
+
+<script src="js/chatbot.js"></script>
+<link rel="stylesheet" type="text/css" href="css/chatbot.css" />
+
+<!-- bloc contenant la partie dialogue avec le chatbot -->
+
+<div id="demo">
+    <div id="chatBotCommandDescription"></div>
+    <input id="humanInput" type="text" placeholder="Entrez ici votre phrase" />
+
+    <div class="button" onclick="if (!ChatBot.playConversation(sampleConversation,4000)) {alert('conversation already running');};">Exemple de conversation</div>
+    <div id="montest" class="button" onclick="$('#chatBotCommandDescription').slideToggle();" style="margin-right:10px">Quelques commandes</div>
+
+    <div style="clear: both;">&nbsp;</div>
+
+    <div id="chatBot">
+        <div id="chatBotThinkingIndicator"></div>
+        <div id="chatBotHistory"></div>
+    </div>
+</div>
+
+
+
+<script>
+
+
+
+// on peut définir des variables "à la volée" (ici une variable booléenne)
+deja_jeu = false;
+
+// voilà comment on peut définir des "faits", par exemple
+var pred1 = Array(4,3);
+//pred1[0] = ["un", "deux", "trois"];
+//pred1[1] = ["quatre", "cinq", "six"];
+pred1= [ ["un", "deux", "trois"] , ["quatre", "cinq", "six"]];
+
+// on peut définir un fait via une fonction de cette manière, bien sûr c'est une astuce qui n'a pas la même facilité qu'avec CLIPS (ici pour le TD5)
+function question(i) {
+    if (i==1) {
+        return ["Très bien, commençons. Préférez vous un gros chien? Oui ou non", "q2", "q3"];
+    }
+    if (i==2) {
+        return ["Préfère tu les poils longs ? Oui ou non", "q4", "q5"];
+    }
+	if (i==3) {
+		return ["Préfère tu les poils longs ? Oui ou non", "q6", "q7"];
+	}
+	if (i==4) {
+		return ["Les chiens peuvent être dynamiques ou calmes. Les préfères-tu calmes ? Oui ou non", "r1", "r2"];
+	}
+	if (i==5) {
+		return ["Les chiens peuvent être dynamiques ou calmes. Les préfères-tu calmes ? Oui ou non", "r4", "r5"];
+	}
+	if (i==6) {
+		return ["Les chiens peuvent être dynamiques ou calmes. Les préfères-tu calmes ? Oui ou non", "r6", "r7"];
+	}
+	if (i==7) {
+		return ["Les chiens peuvent être dynamiques ou calmes. Les préfères-tu calmes ? Oui ou non", "r8", "r3"];
+	}
+
+    return [];
+} 
+
+function reponse(i) {
+    if (i==1) {
+        return "Les Landseers ! C'est un chien affectueux et sociable. Il est réputé pour son grand calme. Si vous avez d'autres questions, n'hésitez pas !";
+    }
+    if (i==2) {
+        return "Le lévrier Afghan alors ! Comme tout lévrier, il doit impérativement pouvoir se dépenser et courir souvent pour garder son équilibre et rester en forme mais il reste affectueux. Si vous avez d'autres questions, n'hésitez pas !";   
+    }
+    if (i==3) {
+        return "Les Fox Terriers sont amicaux mais aussi très extravertis. Il s'agit d'un chien très actif qui saura peut-être vous rendre heureux ? Si vous avez d'autres questions, n'hésitez pas !";   
+    }
+	if (i==4) {
+        return "Les Sharpei sont d'excellent chien de garde, leur tranquillité et leur gentillesse ne laissent pas apparaître cette facette de leur caractère, surtout qu’ils ne sont pas aboyeurs.. Peut-être qu'il vous plaira ! Si vous avez d'autres questions, n'hésitez pas !";   
+    }
+	if (i==5) {
+        return "Le dobermann ? Le Dobermann a besoin de beaucoup d’exercice pour être épanoui et en forme. Il n'en reste pas moins un chien très attaché à son foyer. Si vous avez d'autres questions, n'hésitez pas !";   
+    }
+	if (i==6) {
+        return "Les Yorkshire semblent vous correspondre. Ils sont attachants, petits et proches de leur maître ! Si vous avez d'autres questions, n'hésitez pas !";   
+    }
+	if (i==7) {
+        return "Les Spitz vous correspondraient peut-être ? Alors que sa toute petite taille et ses nombreux poils laissent penser qu’il pourrait ne pas être endurant, il en est tout le contraire. Il aime jouer et se montre très sportif. Si vous avez d'autres questions, n'hésitez pas !";   
+    }
+	if (i==8) {
+        return "Les Shibas vous plairaient peut-être ? C'est un chien calme posé et sensible qui est très indépendant. Il est en plus absolument adorable. Si vous avez d'autres questions, n'hésitez pas !";   
+    }
+
+	
+	
+    return "";
+} 
+
+
+
+var myengine = function() {
+    
+    var capabilities = [
+        "Si vous dîtes 'hip hip', le robot répond 'hourra!'"
+    ]
+
+    return {
+        react: function (query) {
+            
+            var content = '';
+            if (query == 'hip hip') {
+                content = 'hourra!';
+            }
+			if (query == 'Hot') {
+                content = 'Dogs!';
+            }
+			if (query == 'Chienbot') {
+                content = 'Ouaf ouaf ?';
+            }
+            /*if (query == 'test') {
+                content = 'test xp';
+            }*/
+            ChatBot.addChatEntry(content, "bot");
+            ChatBot.thinking(false);
+  
+        },
+        getCapabilities: function() {
+            return capabilities;
+        },
+        getSuggestUrl: function() {
+            //return 'https://yourserver/uniboxSuggests?query=';
+            return 'axs';
+        }
+    }
+}();
+
+    // exemple de conversation (pour la démo)
+    var sampleConversation = [
+        "Bonjour",
+        "Mon nom est Julien",
+        "Comment vas-tu?",
+        "Ca va ?",
+        "Au revoir"
+    ];
+
+    // diverses initialisations
+    var config = {
+        botName: 'My Bot',
+        inputs: '#humanInput',
+        inputCapabilityListing: false,
+        engines: [myengine],
+        addChatEntryCallback: function(entryDiv, text, origin) {
+            entryDiv.delay(200).slideDown();
+        }
+    };
+    ChatBot.init(config);
+
+    // on donne un nom au bot
+    ChatBot.setBotName("chienbot");
+
+    // voici enfin les règles
+    
+    ChatBot.addPattern("^(B|b)onjour", "response", "Bonjour à toi, humain. Je me présente : ChienBot . Je suis ici pour t'aider dans tes recherches de chien. Tu peux me demander quelle race serait idéale selon tes critères pour cela il suffit de dire Aide moi et je t'aiderais ! Tu peux aussi me demander quelles races nous avons sur le site ou bien me parler de ton chien. Je les adore ! Si tu t'ennuies, tu peux également me demander de jouer avec toi.", undefined, "Dire 'Bonjour' pour une réponse accueillante.");
+    ChatBot.addPattern("(B|b)ravo", "response", "Merci, c'est un plaisir d'aider !", undefined, "");
+	ChatBot.addPattern("(O|o)k", "response", "D'autres questions peut-être ?", undefined, "");
+	ChatBot.addPattern("(Q|q)ui es-tu|(Q|q)ui es tu ?", "response", "ChienBot ! Une IA spécialiste (ou presque) des chiens.", undefined, "");
+    //ChatBot.addPattern("^Au revoir$", "response", "Au revoir", undefined, "Dire 'Au revoir' pour clore la conversation.");
+    ChatBot.addPattern("(ç|c|C)a va ?", "response", "Aussi bien que puisse aller quelqu'un qui ne ressent rien.", undefined, "");
+	ChatBot.addPattern("(q|Q|)uelle race avez vous en stock?|Quelle race avez-vous sur le site?", "response", "Nous avons les races suivantes : ", undefined, "");
+    ChatBot.addPattern("^(A|au revoir|A bientôt)$", "response", undefined, "Dire 'Au revoir' pour clore la conversation.");
+	ChatBot.addPattern("(?:J|je me sens) (.*)", "response", "Je ne connais pas ce sentiment. Se sentir $1 n'est pas pour les robots", "");
+	ChatBot.addPattern("Je suis plus (.*) que toi", "response", "Tu n'es pas plus $1 que moi ! Les humains sont trop vaniteux.", "");
+	ChatBot.addPattern("(?:J|je suis) (.*)", "response", "Tu es $1 ? Je vais voir ce que je peux faire de cette information...", "");
+	ChatBot.addPattern("(P|p)ourquoi (.*?)", "response", "Pourquoi pas ?", undefined, "");
+	ChatBot.addPattern("(E|e)st ce que (.*) ?", "response", "Les humains posent trop de questions.. Demdandes moi de t'aider à trouver la race idéale pour ton animal de compagnie ou de jouer avec toi si tu t'ennuies ?", undefined, "");
+	ChatBot.addPattern("(P|p)eux tu (.*?)", "response", "Je ne suis programmé que pour répondre à vos questions.", undefined, "");
+	ChatBot.addPattern("robot", "response", "Es-tu en train de parler de moi ?", undefined, "");
+	ChatBot.addPattern("(?:J|je veux) (.*)", "response", "$1 ? Si tu le désires vraiment, tu y parviendras.", undefined, "");
+	
+    ChatBot.addPattern("(?:Tu es) (.*)", "response", "Tu penses vraiment que je suis $1 ?", function (matches) {
+		if (matches[1]== "gentil") {
+                ChatBot.addChatEntry("Je suis programmé pour vous servir !", "bot");
+            } 
+		if (matches[1]== "moche") {
+                ChatBot.addChatEntry("Je n'ai pas d'apparence. Ce n'est pas une critique pertinente.", "bot");
+            } 
+		if (matches[1]== "bête") {
+                ChatBot.addChatEntry("Toi même.", "bot");
+            } 
+		else { ChatBot.addChatEntry("Je garde cette remarque en mémoire.", "bot"); }
+    },"");
+	
+	
+	
+    ChatBot.addPattern("(?:Mon nom est|Mon prenom est) (.*)", "response", "Salut $1, c'est gentil de venir parler avec moi aujourd'hui", function (matches) {
+        //n = matches[1];
+        ChatBot.setHumanName(matches[1]);
+    },"Dire 'Mon nom est [votre nom]' ou 'Je suis [nom]' pour être appelé comme ça par le robot");
+	
+	
+	
+	ChatBot.addPattern("(?:Mon chien est) (.*)", "response", "$1?  Genial !", function (matches) {
+        //n = matches[1];
+        ChatBot.setDogName(matches[1]);
+    }, "Dire 'Mon chien est' pour que la race de votre chien soit connue par le robot");
+	
+	
+	ChatBot.addPattern("(Q|q)uelle (.*) mon chien ? ", "response", "hm..", function(matches) {
+            ChatBot.addChatEntry("C'est " + ChatBot.getDogName(),"bot");
+    }, "Dire la race du chien");
+	
+	ChatBot.addPattern("(P|p)arlons de mon chien", "response", "Très bien, attends voir !", function(matches) {
+           if (ChatBot.getDogName() == "un caniche") {
+		    ChatBot.addChatEntry("Savais-tu que le nom Caniche provient de canard puisqu'il était à l'époque utilisé pour la pêche aux canards ?");
+    }
+			if (ChatBot.getDogName() == "un dalmatien") {
+		    ChatBot.addChatEntry(" Si tu es intéréssé, Cruella d'Enfer cherche un partenaire pour l'un de ses dalmatiens !");
+    }
+			if (ChatBot.getDogName() == "un fox terrier") {
+		    ChatBot.addChatEntry(" Tintin cherche un partenaire pour son Fox Terrier Milou, tu devrais jeter un coup d'oeil");
+    }
+			if (ChatBot.getDogName() == "un labrador") {
+		    ChatBot.addChatEntry(" C'est le chien le plus populaire aux USA. On comprend largement pourquoi !");
+    }
+			if (ChatBot.getDogName() == "un husky") {
+		    ChatBot.addChatEntry("Le husky est mon chien préféré ! Il est d'une prestance incroyable!");
+    }
+			if (ChatBot.getDogName() == "un dobermann") {
+		    ChatBot.addChatEntry("Il fait un excellent chien de garde je suppose !");
+    }
+			if (ChatBot.getDogName() == "un shiba") {
+		    ChatBot.addChatEntry("Savais-tu que shiba signifie petit au Japon ? Il n'en reste pas moins bruyant.");
+    }
+			if (ChatBot.getDogName() != "un shiba" & "un dobermann" & "un husky" & "un labrador" & "un fox terrier" &  "un dalmatien" & "caniche" ) {
+			ChatBot.addChatEntry("Nom d'un chien ! Je suis navrée, je ne pense pas en avoir la capacité");
+	}		
+	}, "")
+	
+	
+	
+	
+   
+    ChatBot.addPattern("calcule ([0-9]+) plus ([0-9]+)", "response", undefined, function (matches) {
+        ChatBot.addChatEntry("Ca devrait être "+(1*matches[1]+1*matches[2])+".","bot");
+    },"Dire 'calcule [nombre] plus [nombre]' pour faire un calcul simple");
+    ChatBot.addPattern("^(S|s)alut$", "rewrite", "Bonjour", undefined, "...");
+    ChatBot.addPattern("^pred1$", "response", pred1[1][2], undefined, "Dire 'Bonjour' pour une réponse accueillante.");
+    ChatBot.addPattern("^(A|a)ide moi$", "rewrite", "question 1", undefined, "...");
+    ChatBot.addPattern("^question ([0-9]+)$", "response", undefined,
+        function(matches) {
+            if (deja_jeu && matches[1]==1) {
+                ChatBot.addChatEntry("Encore...? Ok, c'est parti.", "bot");
+            } else deja_jeu = true;
+            current_question = matches[1]
+            //console.log(question(1*matches[1]));
+            ChatBot.addChatEntry(question(current_question)[0], "bot");
+            choix1 = question(current_question)[1];
+            choix2 = question(current_question)[2];
+    }, undefined);
+    ChatBot.addPattern("^oui", "response", undefined, 
+        function(matches) {
+            if (typeof current_question !== 'undefined') {
+                //ChatBot.addChatEntry("Je vais répondre à " + current_question, "bot");
+                console.log("choix = " + choix1);
+                if (choix1.substring(0, 1) == "q") {                    
+                    ChatBot.react("question " + choix1.substring(1, 2));
+                }
+                else
+                    ChatBot.react("reponse " + choix1.substring(1, 2));
+            }      
+            else ChatBot.react("inconnu");
+    }, undefined);
+    ChatBot.addPattern("^non", "response", undefined, 
+        function(matches) {
+            if (typeof current_question !== 'undefined') {
+                //ChatBot.addChatEntry("Je vais répondre à " + current_question, "bot");
+                console.log("choix = " + choix2);
+                if (choix2.substring(0, 1) == "q") {
+                    ChatBot.react("question " + choix2.substring(1, 2));
+                }
+                else
+                    ChatBot.react("reponse " + choix2.substring(1, 2));
+            }    
+            else ChatBot.react("inconnu");        
+    }, undefined);
+    ChatBot.addPattern("^reponse ([0-9]+)$", "response", undefined, function(matches) {
+            console.log(reponse(matches[1]));
+            ChatBot.addChatEntry("Je pense avoir trouvé ce qu'il vous fallait : " + reponse(matches[1]), "bot");
+            current_question = undefined;
+
+    }, undefined); 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	ChatBot.addPattern("^(J|j)ou", "rewrite", "quizz 1", undefined, "...");
+    ChatBot.addPattern("^quizz ([0-9]+)$", "response", undefined,
+        function(matches) {
+            current_quizz = matches[1]
+            //console.log(question(1*matches[1]));
+            ChatBot.addChatEntry(quizz(current_quizz)[0], "bot");
+            choix1 = quizz(current_quizz)[1];
+            choix2 = quizz(current_quizz)[2];
+    }, undefined);
+    ChatBot.addPattern("^vrai", "response", undefined, 
+        function(matches) {
+            if (typeof current_quizz !== 'undefined') {
+                //ChatBot.addChatEntry("Je vais répondre à " + current_question, "bot");
+                console.log("choix = " + choix1);
+                if (choix1.substring(0, 1) == "q") {                    
+                    ChatBot.react("quizz " + choix1.substring(1, 2));
+                }
+                else
+                    ChatBot.react("repquizz " + choix1.substring(1, 2));
+            }      
+            else ChatBot.react("inconnu");
+    }, undefined);
+    ChatBot.addPattern("^faux", "response", undefined, 
+        function(matches) {
+            if (typeof current_quizz !== 'undefined') {
+                //ChatBot.addChatEntry("Je vais répondre à " + current_question, "bot");
+                console.log("choix = " + choix2);
+                if (choix2.substring(0, 1) == "q") {
+                    ChatBot.react("quizz " + choix2.substring(1, 2));
+                }
+                else
+                    ChatBot.react("repquizz " + choix2.substring(1, 2));
+            }    
+            else ChatBot.react("inconnu");        
+    }, undefined);
+    ChatBot.addPattern("^repquizz ([0-9]+)$", "response", undefined, function(matches) {
+            console.log(repquizz(matches[1]));
+            ChatBot.addChatEntry("Oh !" + repquizz(matches[1]), "bot");
+            current_quizz = undefined;
+
+    }, undefined); 
+	
+	
+	function quizz(i) {
+    if (i==1) {
+        return ["Les chiens préférés de cruella sont des dalmatiens ? Vrai ou faux ?", "q2", "r1"];
+    }
+    if (i==2) {
+        return ["Bien ! Le spitz est un cocktail vénitien à base de Prosecco d'Apérol ou de Campari ? Vrai ou faux? ", "r1", "q3"];
+    }
+	if (i==3) {
+        return ["Le berger belge est le chien préféré des français ? Vrai ou faux ?", "q4", "r1"];
+    }
+	if (i==4) {
+        return ["Milou le chien de tintin est un Fox Terrier ? Vrai ou faux ?", "q5", "r1"];
+    }
+	if (i==5) {
+        return ["Le saint bernard est un chien connu pour sa petitesse ? Vrai ou faux ?", "r1", "q6"];
+    }
+	if (i==6) {
+        return ["Les chiens voient le monde en noir et blanc ? Vrai ou faux ?", "r1", "q7"];
+    }
+	if (i==7) {
+        return ["Le chien dispose de 8 groupes sanguins différents ? Vrai ou faux ?", "q8", "r1"];
+    }
+	if (i==8) {
+        return ["Le  chow-chow est un chien à la langue bleu ? Vrai ou faux ?", "q9", "r1"];
+    }
+	if (i==9) {
+        return ["Dernière question, mais pas des moindres ! Le chien est le meilleur animal de compagnie ? Vrai ou faux ?", "r2", "r1"];
+    }
+	
+    return [];
+} 
+
+function repquizz(i) {
+    if (i==1) {
+        return " Perdu ! Retentes ta chance la prochaine fois.";
+    }
+    if (i==2) {
+        return " Gagné ! Quel expert !";   
+    }
+
+	
+    return "";
+} 
+	
+	
+	
+	
+	
+
+
+</script>
+
+</body></html>
