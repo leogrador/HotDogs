@@ -1,14 +1,7 @@
 <?php
-require 'Session.php';
-Session::start();
-Session::set('name', array(
-    'name' => 'jesse',
-    'number' => 911
-));
+require_once 'coeur/init.php';
 
-echo Session::get('name');
-
-Session::display();
+$user = new User();
 ?>
 <html>
 <head>
@@ -46,7 +39,7 @@ Session::display();
 
         <nav>
             <ul>
-                <li id="current"><a href="index.php">Accueil</a><span></span></li>
+                <li id="current"><a href="indexnew.php">Accueil</a><span></span></li>
                 <li><a href="Connexion.php">Connexion</a><span></span></li>
                 <li><a href="Annonces.php">Annonces</a><span></span></li>
                 <li><a href="contact.php">Nous contacter</a><span></span></li>
@@ -96,12 +89,11 @@ Session::display();
                     <!-- affichage du déconnexion seulement si connecté -->
 
                     <p><a class="more" href="inscription.php">Inscription &raquo;</a></p>
-                    <?php
-                    if (isset($_SESSION["login"]) AND
-                        $_SESSION["login"] != "") {
-                        $var = $_SESSION["login"];
+                   
+				   <?php
+                    if($user->isLoggedIn()) {
                         Echo '<p><a class="more" href="deconnexion.php">Deconnexion &raquo; </a></p>';
-                    }
+					}
                     ?>
 
                 </div>

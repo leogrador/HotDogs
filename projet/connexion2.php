@@ -76,7 +76,7 @@ session_start();
             <!-- met un message d'erreur si déjà connecté. Vérifie que les champs ne sont pas vide. Requete vérifie que les données existent bien dans la table user. Si oui, message de confirmation. -->
 
             <?php
-            if (isset($_SESSION["login"]) AND
+            /*if (isset($_SESSION["login"]) AND
                 $_SESSION["login"] != "") {
                 Echo 'Vous êtes déjà connecté(e) en tant  que ' . $_SESSION["login"] . ' !';
             } else {
@@ -97,7 +97,7 @@ session_start();
 
                     mysqli_close($connexion);
                 }
-            }
+            }*/
             ?>
 
 

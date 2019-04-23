@@ -1,6 +1,52 @@
 <?php
-session_start();
+require_once 'coeur/init.php';
 
+if(Input::exists()) {
+		
+	$validate = new Validate();
+	$validation = $validate->check($_POST, array(
+		'login' => array(
+			'required' => true,
+			'min' => 2,
+			'max' => 20,
+			'unique' => 'user'
+		),
+		'mdp' => array(
+			'required' => true,
+			'min' => 2
+		),
+		'confirmpass' => array(
+			'required' => true,
+			'matches' => 'mdp'
+		),
+		'email' => array(
+			'required' => true,
+			'min' => 2,
+			'max' => 30
+		)
+	));
+	
+	if($validation->passed()) {
+		$user = new User();
+		try {
+			
+			$user->create(array(
+			'login' => Input::get('login'),
+			'mdp' => Input::get('mdp'),
+			'email' => Input::get('email')
+			));
+			echo 'Inscription réussie!';
+			
+		} catch(Exception $e) {
+			die($e->getMessage());
+		}
+		
+	} else {
+		foreach($validation->errors() as $error) {
+			echo $error, '<br>';
+		}
+	}
+}
 ?>
 <head>
 
@@ -76,15 +122,15 @@ session_start();
             <!-- Affiche message si déjà connecté. Vérifie que les champs sont remplis et que les mots de passes correspondent. Si tout est bon on envoie dans la table user. Sinon message d'erreur -->
             <?php
             //use projet\User;
-
+			/*require 'User.php';
             if (isset($_SESSION["login"]) AND
                 $_SESSION["login"] != "") {
                 Echo 'Vous êtes déjà connecté(e) en tant que' . $_SESSION["login"] . ' !';
             } else {
                 if ((!empty ($_POST["login"])) and (!empty($_POST["mdp"])) and (!empty($_POST["confirmpass"])) and (!empty($_POST["email"]))) {
                    ////////////////
-//                    $user= new User();//talvez possas guardar o user na sessao para aceder a ele mais rapido
-//                    $user->login($_POST["login"],crypt($_POST['mdp'], 'static_salt'));
+                    $user= new User();//talvez possas guardar o user na sessao para aceder a ele mais rapido
+                    $user->login($_POST["login"],crypt($_POST['mdp'], 'static_salt'));
 
                   ////////////////////////////
                    $login = $_POST["login"];
@@ -111,7 +157,7 @@ session_start();
                 } else {
                     die("Il manque un ou plusieurs éléments pour vous inscrire !");
                 }
-            }
+            }*/
             ?>
 
 

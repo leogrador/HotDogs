@@ -1,5 +1,30 @@
 <?php
-session_start();
+require_once 'coeur/init.php';
+
+if(Input::exists()) {
+	$validate = new Validate();
+	$validation = $validate->check($_POST, array(
+		'login' => array('required' => true),
+		'mdp' => array('required' => true)
+	));
+	
+	if($validation->passed()) {
+		$user = new User();
+		$login = $user->login(Input::get('login'), Input::get('mdp'));
+		
+		if($login) {
+			header ('Location: indexnew.php');
+		} else {
+			echo '<p>Connexion ratée</p>';
+		}
+		
+	} else {
+		foreach($validation->errors() as $error) {
+			echo $error, '<br>';
+		}
+	}
+	
+}
 
 ?>
 <head>
@@ -126,7 +151,7 @@ session_start();
 
             <div class="primary">
 
-                <form action="connexion2.php" method="POST">
+                <form action="connexion.php" method="POST">
 
                     <div>
                         <label for="login">Login <span>*</span></label>

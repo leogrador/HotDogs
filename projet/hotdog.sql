@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 24 jan. 2019 à 03:18
--- Version du serveur :  5.7.17
--- Version de PHP :  5.6.30
+-- Généré le :  Dim 21 avr. 2019 à 02:35
+-- Version du serveur :  10.1.38-MariaDB
+-- Version de PHP :  7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -111,7 +111,13 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `login`, `mdp`, `email`) VALUES
 (2, 'Asterix', 'stxqNZ48BD4hU', 'asterix@gmail.com'),
 (1, 'Tintin', 'st17ZQB2FxpgA', 'TintinMilou@gmail.com'),
-(9, 'Cruella', 'stV6DDIO3QZPE', 'Cruelladenfer@gmail.com');
+(9, 'Cruella', 'stV6DDIO3QZPE', 'Cruelladenfer@gmail.com'),
+(10, 'leoleoleo', 'st.N.H9/dGHt.', 'leoleoleo@gmail.com'),
+(22, 'oila2', 'oila2', 'oila@gmail.com'),
+(21, 'oila', 'oila', 'oila@gmail.com'),
+(24, 'Coucou', 'salut', 'coucou@gmail.com'),
+(23, 'Coucou', 'salut', 'coucou@gmail.com'),
+(25, 'miau', 'miau', 'miau@gmail.com');
 
 --
 -- Index pour les tables déchargées
@@ -154,16 +160,19 @@ ALTER TABLE `user`
 --
 ALTER TABLE `annonce`
   MODIFY `id_annonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT pour la table `race`
 --
 ALTER TABLE `race`
   MODIFY `id_race` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;COMMIT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
