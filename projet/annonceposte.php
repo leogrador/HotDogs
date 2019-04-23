@@ -75,7 +75,7 @@ $_SESSION['ville'] = $ville;
 
 }
 
-mysqli_close($connexion); }}
+mysqli_close($connexion);
 ?>
 
 

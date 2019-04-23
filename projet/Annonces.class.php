@@ -2,19 +2,21 @@
 
 require_once 'coeur/init.php';
 
-$user = new User();
+
  
-    class Requete {         
+    class Requete {
+
 	private $pdo;   // Identifiant de connexion         
 	private $nom;   // Nom de la requête        
 	private $req;   // Requête à exécuter         
 	private $res;   // Résultat de la requête       
 	private $atts;  // Attributs à afficher                
+	private $user;
 	
 	
-	
-	function __construct($param_pdo, $param_nom, $param_req, $param_atts) {            
-	$this->pdo = $param_pdo;             
+	function __construct($param_pdo, $param_nom, $param_req, $param_atts) {
+	    $this->user = new User();
+	$this->pdo = $param_pdo;
 	$this->nom = $param_nom;             
 	$this->req = $param_req;             
 	$this->atts = $param_atts;         
@@ -85,8 +87,8 @@ $user = new User();
  
  
     public function ajouterMatiere($nom, $mail_post, $sexe, $age, $prix, $ville, $id_race, $id_user, $photo) { 
-	if($user->isLoggedIn()) {
-		$user = $this->find($login);
+	if($this->user->isLoggedIn()) {
+        $this->user = $this->find($login);
 		$res = $this->pdo->prepare('
 		INSERT INTO annonce (nom, mail_post, sexe, age, prix, ville, id_race, id_user, photo) VALUES(?, ?, ?, ?, ?, ?, (SELECT id_race FROM race WHERE nom_race = ?), (SELECT id_user FROM user WHERE login = ?),? )');   	
 		$res->execute([$nom, $mail_post, $sexe, $age, $prix, $ville, $id_race, $id_user, $photo]);  
